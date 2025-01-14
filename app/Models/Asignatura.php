@@ -8,8 +8,10 @@ class Asignatura extends Model
 {
     protected $fillable = ['nombre', 'descripcion'];
 
-    public function notas()
+    public function alumnos()  // Conecto con Alumnos la relacion N a N usando la tabla Nota de pivote
     {
-        return $this->hasMany(Nota::class);
+        return $this->belongsToMany(Alumno::class, 'notas')
+                    ->withPivot('nota')
+                    ->withTimestamps();
     }
 }
